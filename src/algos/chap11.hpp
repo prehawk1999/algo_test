@@ -28,11 +28,36 @@ void _innerQsort1(typename Type::iterator l, typename Type::iterator u){
 			std::swap( *++m, *it );
 		}
 	}
-	swap( *l, *m );
+	std::swap( *l, *m );
 	_innerQsort1< Type >(l, m);
 	_innerQsort1< Type >(m+1, u);
 }
 
+/*
+ * pre. quicksort version 2
+ * $1: begin iter, $2: end iter that point over the end of vector
+ * @return void
+ * */
+template<typename Type>
+void _innerQsort2(typename Type::iterator l, typename Type::iterator u){
+
+	if(l >= u) return;
+
+	vi::iterator i(l);
+	vi::iterator j(u);
+	int t = *l;
+
+	while(1){
+		do i++; while( i <= u && *i < t);
+		do j--; while( j == u || *j > t);
+		if( i > j )
+			break;
+		std::swap(*i, *j);
+	}
+	std::swap(*l, *j);
+	_innerQsort2< Type >(l, j);
+	_innerQsort2< Type >(j+1, u);
+}
 
 /*
  * P112 example
@@ -44,7 +69,7 @@ template<typename Type>
 Type mysort(Type x){
 
 	boost::timer::auto_cpu_timer t;
-	_innerQsort1< Type >(x.begin(), x.end());
+	_innerQsort2< Type >(x.begin(), x.end());
 	return x;
 }
 
@@ -120,6 +145,8 @@ void test_main(){
 		assertsorted( mysort< vi >(getsorted(i)) );
 		std::cout << i << "\telements sorted!" << std::endl << std::endl;
 	}
+
+	std::cout << "======All tests have been passed======" << std::endl;
 }
 
 #endif /* CHAP11_HPP_ */

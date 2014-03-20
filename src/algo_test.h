@@ -14,6 +14,7 @@
 #include <algorithm>
 #include <cstdlib>
 #include <ctime>
+#include <cassert>
 
 
 typedef std::vector<int> vi;
