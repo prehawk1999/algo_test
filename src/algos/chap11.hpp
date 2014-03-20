@@ -59,10 +59,29 @@ Type mysort(Type x){
 vi getunsort(int num){
 
 	std::vector<int> test;
+	test.reserve(num);
 	for(int i=0; i<num; ++i) test.push_back(i);
 	std::srand ( unsigned ( std::time(0) ) );
 	std::random_shuffle(test.begin(), test.end());
 
+	return test;
+}
+
+vi getsame(int num){
+
+	std::vector<int> test;
+	test.reserve(num);
+	for(int i=0; i<num; ++i) test.push_back(0);
+	return test;
+}
+
+vi getsorted(int num){
+
+	std::vector<int> test;
+	test.reserve(num);
+	for(int i=num; i>=0; --i){
+		test.push_back(i);
+	}
 	return test;
 }
 
@@ -77,9 +96,28 @@ void assertsorted(vi sorted ){
 
 void test_main(){
 
+	std::cout << "******Testing non-value******" << std::endl;
+	assertsorted( mysort< vi >(getunsort(0)));
+	std::cout << std::endl << std::endl;
+
+	std::cout << "******Testing unsorted array******" << std::endl;
 	for(int i = 1; i<=1000000; i *= 10){
 
 		assertsorted( mysort< vi >(getunsort(i)) );
+		std::cout << i << "\telements sorted!" << std::endl << std::endl;
+	}
+
+	std::cout << "******Testing same elem array******" << std::endl;
+	for(int i = 1; i<=10000; i *= 10){
+
+		assertsorted( mysort< vi >(getsame(i)) );
+		std::cout << i << "\telements sorted!" << std::endl << std::endl;
+	}
+
+	std::cout << "******Testing descending elem array******" << std::endl;
+	for(int i = 1; i<=10000; i *= 10){
+
+		assertsorted( mysort< vi >(getsorted(i)) );
 		std::cout << i << "\telements sorted!" << std::endl << std::endl;
 	}
 }
