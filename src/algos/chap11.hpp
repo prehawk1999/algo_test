@@ -3,6 +3,10 @@
  *
  *  Created on: Mar 20, 2014
  *      Author: prehawk
+ *
+ *
+ *
+ *      usage: change the mysort func. with different _innerQsort method and test it
  */
 
 #ifndef CHAP11_HPP_
@@ -10,7 +14,12 @@
 
 #include "../algo_test.h"
 
+#include <random>
 
+#include <cstdlib>
+
+
+std::mt19937 generator;
 
 /*
  * pre. quicksort
@@ -34,7 +43,7 @@ void _innerQsort1(typename Type::iterator l, typename Type::iterator u){
 }
 
 /*
- * pre. quicksort version 2
+ * pre. quicksort version 2, scan from two directions, better perf. in sorting same elem.
  * $1: begin iter, $2: end iter that point over the end of vector
  * @return void
  * */
@@ -59,6 +68,37 @@ void _innerQsort2(typename Type::iterator l, typename Type::iterator u){
 	_innerQsort2< Type >(j+1, u);
 }
 
+
+/*
+ * pre. quicksort version 32, scan from two directions, better perf. in sorting same elem.
+ * with random characteristic, better perf. in sorting invert vectors.
+ * $1: begin iter, $2: end iter that point over the end of vector
+ * @return void
+ * */
+template<typename Type>
+void _innerQsort3(typename Type::iterator l, typename Type::iterator u){
+
+	if(l >= u) return;
+
+	std::uniform_int_distribution<int> dis( 0, u - l - 1);
+	vi::iterator next = l + dis(generator);
+	swap(*l, *next );
+
+	vi::iterator i(l);
+	vi::iterator j(u);
+	int t = *l;
+
+	while(1){
+		do i++; while( i <= u && *i < t);
+		do j--; while( j == u || *j > t);
+		if( i > j )
+			break;
+		std::swap(*i, *j);
+	}
+	std::swap(*l, *j);
+	_innerQsort3< Type >(l, j);
+	_innerQsort3< Type >(j+1, u);
+}
 /*
  * P112 example
  * pre. user define sort method
@@ -69,7 +109,9 @@ template<typename Type>
 Type mysort(Type x){
 
 	boost::timer::auto_cpu_timer t;
-	_innerQsort2< Type >(x.begin(), x.end());
+
+
+	_innerQsort3< Type >(x.begin(), x.end());
 	return x;
 }
 
@@ -84,7 +126,6 @@ Type mysort(Type x){
 vi getunsort(int num){
 
 	std::vector<int> test;
-	test.reserve(num);
 	for(int i=0; i<num; ++i) test.push_back(i);
 	std::srand ( unsigned ( std::time(0) ) );
 	std::random_shuffle(test.begin(), test.end());
@@ -95,7 +136,6 @@ vi getunsort(int num){
 vi getsame(int num){
 
 	std::vector<int> test;
-	test.reserve(num);
 	for(int i=0; i<num; ++i) test.push_back(0);
 	return test;
 }
@@ -103,7 +143,6 @@ vi getsame(int num){
 vi getsorted(int num){
 
 	std::vector<int> test;
-	test.reserve(num);
 	for(int i=num; i>=0; --i){
 		test.push_back(i);
 	}
@@ -122,27 +161,27 @@ void assertsorted(vi sorted ){
 void test_main(){
 
 	std::cout << "******Testing non-value******" << std::endl;
-	assertsorted( mysort< vi >(getunsort(0)));
+	assertsorted( mysort< vi >( getunsort(0) ));
 	std::cout << std::endl << std::endl;
 
 	std::cout << "******Testing unsorted array******" << std::endl;
 	for(int i = 1; i<=1000000; i *= 10){
 
-		assertsorted( mysort< vi >(getunsort(i)) );
+		assertsorted( mysort< vi >( getunsort(i) ) );
 		std::cout << i << "\telements sorted!" << std::endl << std::endl;
 	}
 
 	std::cout << "******Testing same elem array******" << std::endl;
 	for(int i = 1; i<=10000; i *= 10){
 
-		assertsorted( mysort< vi >(getsame(i)) );
+		assertsorted( mysort< vi >( getsame(i) ) );
 		std::cout << i << "\telements sorted!" << std::endl << std::endl;
 	}
 
 	std::cout << "******Testing descending elem array******" << std::endl;
 	for(int i = 1; i<=10000; i *= 10){
 
-		assertsorted( mysort< vi >(getsorted(i)) );
+		assertsorted( mysort< vi >( getsorted(i) ) );
 		std::cout << i << "\telements sorted!" << std::endl << std::endl;
 	}
 
