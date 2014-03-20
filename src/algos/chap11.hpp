@@ -70,7 +70,7 @@ void _innerQsort2(typename Type::iterator l, typename Type::iterator u){
 
 
 /*
- * pre. quicksort version 32, scan from two directions, better perf. in sorting same elem.
+ * pre. quicksort version 3, scan from two directions, better perf. in sorting same elem.
  * with random characteristic, better perf. in sorting invert vectors.
  * $1: begin iter, $2: end iter that point over the end of vector
  * @return void
@@ -81,8 +81,7 @@ void _innerQsort3(typename Type::iterator l, typename Type::iterator u){
 	if(l >= u) return;
 
 	std::uniform_int_distribution<int> dis( 0, u - l - 1);
-	vi::iterator next = l + dis(generator);
-	swap(*l, *next );
+	swap(*l, *( l + dis(generator) ) );
 
 	vi::iterator i(l);
 	vi::iterator j(u);
