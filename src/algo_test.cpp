@@ -8,7 +8,7 @@
 
 #include "algo_test.h"
 #include "algos/data.hpp"
-#include "algos/chap11.hpp"
+#include "algos/chap12.hpp"
 
 using namespace std;
 
