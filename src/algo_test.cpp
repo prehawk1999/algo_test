@@ -7,8 +7,7 @@
 //============================================================================
 
 #include "algo_test.h"
-#include "algos/data.hpp"
-#include "algos/chap12.hpp"
+#include "pearls/chap1.hpp"
 
 using namespace std;
 

@@ -18,7 +18,7 @@
 #include <cstdlib>
 
 
-std::mt19937 generator(time(NULL));
+mt19937 generator(time(NULL));
 
 /*
  * pre. quicksort
@@ -33,10 +33,10 @@ void _innerQsort1(typename Type::iterator l, typename Type::iterator u){
 	vi::iterator m = l ;
 	for(vi::iterator it = m+1; it != u; ++it){
 		if( (*it) < (*l) ){
-			std::swap( *++m, *it );
+			swap( *++m, *it );
 		}
 	}
-	std::swap( *l, *m );
+	swap( *l, *m );
 	_innerQsort1< Type >(l, m);
 	_innerQsort1< Type >(m+1, u);
 }
@@ -60,9 +60,9 @@ void _innerQsort2(typename Type::iterator l, typename Type::iterator u){
 		do j--; while( j == u || *j > t);
 		if( i > j )
 			break;
-		std::swap(*i, *j);
+		swap(*i, *j);
 	}
-	std::swap(*l, *j);
+	swap(*l, *j);
 	_innerQsort2< Type >(l, j);
 	_innerQsort2< Type >(j+1, u);
 }
@@ -79,7 +79,7 @@ void _innerQsort3(typename Type::iterator l, typename Type::iterator u){
 
 	if(l >= u) return;
 
-	std::uniform_int_distribution<int> dis( 0, u - l - 1);
+	uniform_int_distribution<int> dis( 0, u - l - 1);
 	swap(*l, *( l + dis(generator) ) );
 
 	vi::iterator i(l);
@@ -91,9 +91,9 @@ void _innerQsort3(typename Type::iterator l, typename Type::iterator u){
 		do j--; while( j == u || *j > t);
 		if( i > j )
 			break;
-		std::swap(*i, *j);
+		swap(*i, *j);
 	}
-	std::swap(*l, *j);
+	swap(*l, *j);
 	_innerQsort3< Type >(l, j);
 	_innerQsort3< Type >(j+1, u);
 }
@@ -120,7 +120,7 @@ Type mysort(Type x, int version){
 		_innerQsort3< Type >(x.begin(), x.end());
 		break;
 	case 4:
-		std::sort(x.begin(), x.end());
+		sort(x.begin(), x.end());
 	}
 	return x;
 }
@@ -129,24 +129,24 @@ Type mysort(Type x, int version){
 
 vi getunsort(int num){
 
-	std::vector<int> test;
+	vector<int> test;
 	for(int i=0; i<num; ++i) test.push_back(i);
-	std::srand ( unsigned ( std::time(0) ) );
-	std::random_shuffle(test.begin(), test.end());
+	srand ( unsigned ( time(0) ) );
+	random_shuffle(test.begin(), test.end());
 
 	return test;
 }
 
 vi getsame(int num){
 
-	std::vector<int> test;
+	vector<int> test;
 	for(int i=0; i<num; ++i) test.push_back(0);
 	return test;
 }
 
 vi getsorted(int num){
 
-	std::vector<int> test;
+	vector<int> test;
 	for(int i=num; i>=0; --i){
 		test.push_back(i);
 	}
@@ -164,32 +164,32 @@ void assertsorted(vi sorted ){
 
 void version_test(int version){
 
-	std::cout << "******Testing non-value******" << std::endl;
+	cout << "******Testing non-value******" << endl;
 	assertsorted( mysort< vi >( getunsort(0), version ));
-	std::cout << std::endl << std::endl;
+	cout << endl << endl;
 
-	std::cout << "******Testing unsorted array******" << std::endl;
+	cout << "******Testing unsorted array******" << endl;
 	for(int i = 1; i<=10000000; i *= 10){
 
 		assertsorted( mysort< vi >( getunsort(i), version ) );
-		std::cout << i << "\telements sorted!" << std::endl << std::endl;
+		cout << i << "\telements sorted!" << endl << endl;
 	}
 
-	std::cout << "******Testing same elem array******" << std::endl;
+	cout << "******Testing same elem array******" << endl;
 	for(int i = 1; i<=10000000; i *= 10){
 
 		assertsorted( mysort< vi >( getsame(i), version ) );
-		std::cout << i << "\telements sorted!" << std::endl << std::endl;
+		cout << i << "\telements sorted!" << endl << endl;
 	}
 
-	std::cout << "******Testing descending elem array******" << std::endl;
+	cout << "******Testing descending elem array******" << endl;
 	for(int i = 1; i<=10000000; i *= 10){
 
 		assertsorted( mysort< vi >( getsorted(i), version ) );
-		std::cout << i << "\telements sorted!" << std::endl << std::endl;
+		cout << i << "\telements sorted!" << endl << endl;
 	}
 
-	std::cout << "======All tests have been passed======" << std::endl;
+	cout << "======All tests have been passed======" << endl;
 }
 
 void test_main(){
