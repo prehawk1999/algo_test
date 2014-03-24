@@ -15,6 +15,8 @@
 #include <cstdlib>
 #include <ctime>
 #include <cassert>
+#include <cmath>
+#include <unistd.h>
 
 using namespace std;
 

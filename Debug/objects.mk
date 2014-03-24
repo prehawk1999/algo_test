@@ -4,5 +4,5 @@
 
 USER_OBJS :=
 
-LIBS := -lboost_timer -lboost_system
+LIBS := -lboost_system -lboost_timer
 
