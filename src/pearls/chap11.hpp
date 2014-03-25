@@ -195,7 +195,7 @@ void version_test(int version){
 void test_main(){
 
 	// about 1 minute, version 1 and 2 for some reason can't pass the test
-	version_test(4);
+	version_test(3);
 }
 
 #endif /* CHAP11_HPP_ */

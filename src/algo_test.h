@@ -9,6 +9,9 @@
 #define ALGO_TEST_H_
 
 #include <iostream>
+#include <fstream>
+#include <sstream>
+#include <map>
 #include <boost/timer/timer.hpp>
 #include <vector>
 #include <algorithm>
