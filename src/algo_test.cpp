@@ -12,7 +12,7 @@
  * */
 
 #include "algo_test.h"
-#include "pearls/chap2.hpp"
+#include "pearls/chap3.hpp"
 
 using namespace std;
 

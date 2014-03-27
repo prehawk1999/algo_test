@@ -11,21 +11,37 @@
 
 
 const char * tails[] = {
-		"et-ic", "al-is-tic", "s-tic", "p-tic", "-lyt-ic", "ot-ic",
-		"an-tic", "n-tic", "c-tic", "at-ic", "h-nic", "n-ic", "m-ic",
-		"l-lic", "b-lic", "-clic", "l-ic", "h-ic", "f-ic", "d-ic", "-bic",
-		"a-ic", "-mac", "i-ac"
+		"etic", "alistic", "stic", "ptic", "lytic", "otic",
+		"antic", "ntic", "ctic", "atic", "hnic", "nic", "mic",
+		"llic", "blic", "clic", "lic", "hic", "fic", "dic", "bic",
+		"aic", "mac", "iac"
 };
 
 const int tails_l = 24;
 
-template<typename StrType>
-StrType gettail(StrType s, int size){
 
+string getsuffix(string input){
 
-	return s;
+	string tail;
+	for(int i=0; i<24; ++i){
+		tail = tails[i];
+		//int s = find(input.begin(), input.end(), tails[i]);
+		if(1){
+			cout << tail << endl;
+		}
+	}
+	return input;
+}
+
+void test(){
+
+	getsuffix("ethnic");
+
 }
 
 
+void test_main(){
+	test();
+}
 
 #endif /* CHAP3_HPP_ */
