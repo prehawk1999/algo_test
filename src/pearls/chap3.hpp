@@ -20,12 +20,13 @@ const char * tails[] = {
 const int tails_l = 24;
 
 
+
+
 string getsuffix(string input){
 
 	string tail;
 	for(int i=0; i<24; ++i){
 		tail = tails[i];
-		//int s = find(input.begin(), input.end(), tails[i]);
 		if(1){
 			cout << tail << endl;
 		}
@@ -39,9 +40,50 @@ void test(){
 
 }
 
+int foo(int i){
+	int a = i;
+	int b = -i;
+	return a & b;
+}
+
+typedef int ElemType;
+
+struct Node{ElemType data; struct Node * next;};
+
+size_t lstLen(Node * lst){
+
+	size_t len = 0;
+	while(lst != NULL){
+		lst = lst->next;
+		++len;
+	}
+	return len;
+}
+
+void intersect(Node * a, Node * b){
+
+	Node * pa = a;
+	Node * pb = b;
+
+	size_t dif = lstLen(a) - lstLen(b);
+	if(dif < 0){
+		pa = b;
+		pb = a;
+		dif = -dif;
+	}
+
+
+
+}
 
 void test_main(){
-	test();
+
+	//test();
+
+
+
+	int i;
+	cin >> i;
 }
 
 #endif /* CHAP3_HPP_ */
