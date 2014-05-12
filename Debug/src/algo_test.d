@@ -175,8 +175,8 @@ src/algo_test.d: ../src/algo_test.cpp ../src/algo_test.h \
  E:\boost_1_55_0/boost/noncopyable.hpp E:\boost_1_55_0/boost/cerrno.hpp \
  E:\boost_1_55_0/boost/../libs/system/src/error_code.cpp \
  E:\boost_1_55_0/boost/../libs/system/src/local_free_on_destruction.hpp \
- E:\boost_1_55_0/boost/chrono/clock_string.hpp ../src/pearls/chap3.hpp \
- ../src/pearls/../algo_test.h
+ E:\boost_1_55_0/boost/chrono/clock_string.hpp \
+ ../src/leetcode/sortList.hpp
 
 ../src/algo_test.h:
 
@@ -550,6 +550,4 @@ E:\boost_1_55_0/boost/../libs/system/src/local_free_on_destruction.hpp:
 
 E:\boost_1_55_0/boost/chrono/clock_string.hpp:
 
-../src/pearls/chap3.hpp:
-
-../src/pearls/../algo_test.h:
+../src/leetcode/sortList.hpp:
