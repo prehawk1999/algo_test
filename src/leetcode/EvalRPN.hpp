@@ -9,7 +9,7 @@ using std::string;
 using std::stack;
 using std::cout;
 using std::endl;
-using std::to_string;
+using std::stringstream;
 
 
 class Solution {
@@ -18,26 +18,30 @@ public:
 		string optA, optB;
         stack<string> bag;
 		string temp; 
+
 		for(vector<string>::iterator iter = tokens.begin(); iter != tokens.end(); ++iter){ 
+			stringstream ss;
 			if(*iter == string("+")){
 				getOpt(optA, optB, bag);  
-				bag.push( to_string(getVal(optA) + getVal(optB)) );
+				ss << (getVal(optA) + getVal(optB));
 			}
 			else if(*iter == string("-")){
 				getOpt(optA, optB, bag); 
-				bag.push( to_string(getVal(optA) - getVal(optB)) );
+				ss << (getVal(optA) - getVal(optB));
 			}
 			else if(*iter == string("*")){
 				getOpt(optA, optB, bag); 
-				bag.push( to_string(getVal(optA) * getVal(optB)) );
+				ss << getVal((optA) * getVal(optB));
 			}
 			else if(*iter == string("/")){
 				getOpt(optA, optB, bag); 
-				bag.push( to_string(getVal(optB) / getVal(optA)) );
+				ss << (getVal(optB) / getVal(optA));
 			}
 			else{
-				bag.push(*iter);
+				ss << *iter;
 			} 
+			temp = ss.str();
+			bag.push( temp );
 		} 
 		return getVal(bag.top());
     }
